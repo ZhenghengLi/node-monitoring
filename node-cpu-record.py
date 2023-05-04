@@ -34,7 +34,7 @@ stop_event = threading.Event()
 
 def handler(signal_received, frame):
     stop_event.set()
-    print('stop recording and close file ...')
+    print("\nstop recording and close file ...")
 
 
 signal(SIGINT, handler)
