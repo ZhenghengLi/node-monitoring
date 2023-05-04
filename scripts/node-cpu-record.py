@@ -20,14 +20,9 @@ psutil.cpu_times_percent()
 attr_list = ['user', 'system', 'idle', 'iowait',
              'irq', 'softirq', 'steal', 'guest']
 
-csv_fields = attr_list + ['memory']
+csv_fields = ['unixtime'] + attr_list + ['memory']
 
-cpu_load = {}
-for attr in attr_list:
-    cpu_load[attr] = 0.0
-
-cpu_load['memory'] = 0.0
-
+csv_values = {}
 
 stop_event = threading.Event()
 
@@ -49,13 +44,14 @@ def do_the_record(csvfile):
             time.sleep(args.interval)
             if stop_event.is_set():
                 break
+            csv_values['unixtime'] = "%.2f" % time.time()
             ctp = psutil.cpu_times_percent()
             for attr in attr_list:
-                cpu_load[attr] = getattr(ctp, attr)
+                csv_values[attr] = getattr(ctp, attr)
             svm = psutil.virtual_memory()
-            cpu_load['memory'] = svm.percent
-            print(cpu_load)
-            writer.writerow(cpu_load)
+            csv_values['memory'] = svm.percent
+            print(csv_values)
+            writer.writerow(csv_values)
     print('recording stopped.')
 
 
