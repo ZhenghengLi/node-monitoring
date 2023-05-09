@@ -49,6 +49,7 @@ for row in data:
 print('start_time:', args.start_time)
 print('span_sec:', args.span_sec)
 
+plt.figure(figsize=(12, 7))
 plt.plot(deltatime, cpu_total, linewidth=2)
 plt.plot(deltatime, cpu_user, linewidth=2)
 plt.plot(deltatime, cpu_system, linewidth=2)
@@ -58,5 +59,6 @@ plt.ylim(0, 30)
 plt.xlabel('delta time (s)', fontsize=18)
 plt.ylabel('cpu usage (%)', fontsize=18)
 plt.legend(['total', 'user', 'system', 'irq+softirq'], prop={'size': 18})
+plt.grid()
 
 plt.show()
