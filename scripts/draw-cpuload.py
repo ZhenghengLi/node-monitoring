@@ -7,8 +7,9 @@ import numpy as np
 
 parser = argparse.ArgumentParser(description='desc')
 parser.add_argument("csvfile")
-parser.add_argument("-S", dest="start_time", type=int, default=-1)
-parser.add_argument("-L", dest="span_sec", type=int, default=-1)
+parser.add_argument("-s", dest="start_time", type=int, default=-1)
+parser.add_argument("-l", dest="span_sec", type=int, default=-1)
+parser.add_argument("-t", dest="title", type=str, default='CPU load')
 args = parser.parse_args()
 
 
@@ -59,6 +60,7 @@ plt.ylim(0, 30)
 plt.xlabel('delta time (s)', fontsize=18)
 plt.ylabel('cpu usage (%)', fontsize=18)
 plt.legend(['total', 'user', 'system', 'irq+softirq'], prop={'size': 18})
+plt.title(args.title, fontsize=18)
 plt.grid()
 
 plt.show()
