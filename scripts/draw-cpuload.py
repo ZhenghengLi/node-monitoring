@@ -39,7 +39,7 @@ for row in data:
     cur_delta = float(row['unixtime']) - args.start_time
     if (cur_delta < 0 or cur_delta > args.span_sec):
         continue
-    # print(row)
+    print(row)
     deltatime.append(cur_delta)
     cpu_user.append(float(row['user']))
     cpu_system.append(float(row['system']))
