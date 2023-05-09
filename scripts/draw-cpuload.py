@@ -32,7 +32,7 @@ if args.span_sec < 0:
 deltatime = []      # unixtime - args.start_time
 cpu_user = []       # user
 cpu_system = []     # system
-cpu_allirq = []     # irq + softirq
+cpu_softirq = []    # softirq
 cpu_total = []      # 100 - idle
 
 print('scanning data ...')
@@ -44,7 +44,7 @@ for row in data:
     deltatime.append(cur_delta)
     cpu_user.append(float(row['user']))
     cpu_system.append(float(row['system']))
-    cpu_allirq.append(float(row['irq']) + float(row['softirq']))
+    cpu_softirq.append(float(row['softirq']))
     cpu_total.append(100 - float(row['idle']))
 
 print('start_time:', args.start_time)
@@ -54,14 +54,14 @@ plt.figure(figsize=(12, 7))
 plt.plot(deltatime, cpu_total, linewidth=2)
 plt.plot(deltatime, cpu_user, linewidth=2)
 plt.plot(deltatime, cpu_system, linewidth=2)
-plt.plot(deltatime, cpu_allirq, linewidth=2)
+plt.plot(deltatime, cpu_softirq, linewidth=2)
 
 plt.ylim(0, 30)
 plt.xlabel('delta time (s)', fontsize=18)
 plt.ylabel('cpu usage (%)', fontsize=18)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
-plt.legend(['total', 'user', 'system', 'irq+softirq'], prop={'size': 18})
+plt.legend(['total', 'user', 'system', 'softirq'], prop={'size': 18})
 plt.title(args.title, fontsize=18)
 plt.grid()
 
