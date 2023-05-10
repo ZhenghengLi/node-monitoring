@@ -10,6 +10,7 @@ parser.add_argument("csvfile")
 parser.add_argument("-s", dest="start_time", type=int, default=-1)
 parser.add_argument("-l", dest="span_sec", type=int, default=-1)
 parser.add_argument("-t", dest="title", type=str, default='CPU load')
+parser.add_argument("-y", dest="ylim", type=int, default=30)
 args = parser.parse_args()
 
 
@@ -56,7 +57,7 @@ plt.plot(deltatime, cpu_user, linewidth=2)
 plt.plot(deltatime, cpu_system, linewidth=2)
 plt.plot(deltatime, cpu_softirq, linewidth=2)
 
-plt.ylim(0, 30)
+plt.ylim(0, args.ylim)
 plt.xlabel('delta time (s)', fontsize=18)
 plt.ylabel('cpu usage (%)', fontsize=18)
 plt.xticks(fontsize=14)
